@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./sprites.css">
+</head>
+
+<body>
+    <header class="header container">
+        <button class="header__menu">
+            <svg class="icon icon--menu-mobile">
+                <use xlink:href="./images/menu-mobile.svg#menu-mobile"></use>
+            </svg>
+            <svg class="icon icon--menu header__menu-img">
+                <use xlink:href="./images/menu.svg#menu"></use>
+            </svg>
+        </button>
+        <div class="header__logo">
+            <a class="header__logo-text" href="#">товары<br> и точка</a>
+        </div>
+        <form class="header__search" action="">
+            <label class="header__search-label visually-hidden" for="search"></label>
+            <input class="header__search-input" type="search" placeholder="Я ищу..." id="search">
+            <button type="submit" class="header__search-button">
+                <svg class="icon icon--search header__search-img">
+                    <use xlink:href="./images/search.svg#search"></use>
+                </svg>
+            </button>
+        </form>
+        <a class="header__profile" href="#">
+            <svg class="icon icon--profile header__profile-img">
+                <use xlink:href="./images/profile.svg#profile"></use>
+            </svg>
+            <span class="header__profile-text">профиль</span>
+        </a>
+        <a class="header__cart" href="#">
+            <svg class="icon icon--cart header__cart-img">
+                <use xlink:href="./images/cart.svg#cart"></use>
+            </svg>
+            <span>0</span>
+            <p class="header__cart-text">корзина</p>
+        </a>
+        <button type="submit" class="header__search-button-mobile">
+            <svg class="icon icon--search">
+                <use xlink:href="./images/search.svg#search"></use>
+            </svg>
+        </button>
+    </header>
+    <main class="main">
+        <div class="container">
+            <div class="wrp">
+                <div class="main__base">
+                    <h1 class="main__title">корзина</h1>
+                    <div class="main__goods">
+                        <label>
+                            <input onchange="changeCheckboxes(this)" class="checkbox" type="checkbox" name="checkbox_0">
+                            <span class="custom__input custom__input-multi"></span>
+                        </label>
+                        <p class="main__goods-text">Выбрать все</p>
+                        <button onclick="rotateArrow(this)" class="main__goods-button">
+                            <svg class="icon icon--arrow">
+                                <use xlink:href="./images/arrow.svg#arrow"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <ul id="main__list" class="main__list">
+                        <li data-id="0" data-price="522" class="main__item cart">
+                            <span class="cart__mobile-size"></span>
+                            <label>
+                                <input onchange="changeVisibility(this)" class="checkbox checkbox-single"
+                                    type="checkbox" name="checkbox_1">
+                                <span class="custom__input custom__input-single"></span>
+                            </label>
+                            <img class="cart__img" src="./images/item-1.jpg" width="72" height="96" alt="item-1">
+                            <div class="cart__description">
+                                <h2 class="cart__name">Футболка UZcotton мужская</h2>
+                                <div class="cart__wrp">
+                                    <p class="cart__wrp-text">Цвет: белый</p>
+                                    <p class="cart__wrp-text cart__wrp-size">Размер: 56</p>
+                                </div>
+                                <p class="cart__adress">Коледино WB</p>
+                                <div class="cart__manufacturer">
+                                    <span class="cart__manufacturer-text">OOO
+                                        Вайлдберриз</span>
+                                    <img onmouseenter="showManufacturer(this)" onmouseleave="hideManufacturer(this)"
+                                        class="icon--info" src="./images/info.svg" alt="info">
+                                    <div class="cart__manufacturer-info">
+                                        <p class="cart__manufacturer-title">OOO
+                                            Вайлдберриз</p>
+                                        <p class="cart__manufacturer-info-text">ОГРН: 5167746237148</p>
+                                        <p class="cart__manufacturer-info-text">129337, Москва, улица Красная Сосна, 2,
+                                            корпус 1, стр. 1, помещение 2,
+                                            офис 34</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart__amount">
+                                <div class="cart__amount-counter">
+                                    <button class="cart__amount-button-minus">
+                                        <span class="cart__amount-minus">−</span>
+                                    </button>
+                                    <span data-id="1" data-amount="1" class="cart__amount-num"></span>
+                                    <button class="cart__amount-button-plus">
+                                        <span class="cart__amount-plus">+</span>
+                                    </button>
+                                </div>
+                                <p class="cart__amount-availability"></p>
+                                <div class="cart__amount-icons">
+                                    <button onclick="likeItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--heart cart__amount-img">
+                                            <use xlink:href="./images/heart.svg#heart"></use>
+                                        </svg>
+                                    </button>
+                                    <button onclick="deleteItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--trash cart__amount-img">
+                                            <use xlink:href="./images/trash.svg#trash"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cart__price">
+                                <p data-currentprice="522" class="cart__price-current"></p>
+                                <p onmouseenter="showPrice(this)" onmouseleave="hidePrice(this)"
+                                    class="cart__price-past"></p>
+                                <div class="cart__price-info">
+                                    <div class="cart__price-sale-wrp">
+                                        <p class="cart__price-sale-percent">Скидка 55%</p>
+                                        <p class="cart__price-sale-som">-300 сом</p>
+                                    </div>
+                                    <div class="cart__price-sale-wrp">
+                                        <p class="cart__price-sale-percent">Скидка покупателя 10%</p>
+                                        <p class="cart__price-sale-som">-30 сом</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li data-id="1" data-price="10500,235" class="main__item cart">
+                            <label>
+                                <input onclick="changeVisibility(this)" class="checkbox checkbox-single" type="checkbox"
+                                    name="checkbox_2">
+                                <span class="custom__input custom__input-single"></span>
+                            </label>
+                            <img class="cart__img" src="./images/item-2.jpg" width="72" height="96" alt="item-2">
+                            <div class="cart__description">
+                                <h2 class="cart__name">Силиконовый чехол картхолдер (отверстия) для карт, прозрачный
+                                    кейс
+                                    бампер
+                                    на Apple iPhone XR, MobiSafe</h2>
+                                <div class="cart__wrp">
+                                    <p class="cart__wrp-text">Цвет: прозрачный</p>
+                                </div>
+                                <p class="cart__adress">Коледино WB</p>
+                                <div class="cart__manufacturer">
+                                    <span class="cart__manufacturer-text">OOO
+                                        Мегапрофстиль</span>
+                                    <img onmouseenter="showManufacturer(this)" onmouseleave="hideManufacturer(this)"
+                                        class="icon--info" src="./images/info.svg" alt="info">
+                                    <div class="cart__manufacturer-info">
+                                        <p class="cart__manufacturer-title">OOO
+                                            Вайлдберриз</p>
+                                        <p class="cart__manufacturer-info-text">ОГРН: 5167746237148</p>
+                                        <p class="cart__manufacturer-info-text">129337, Москва, улица Красная Сосна, 2,
+                                            корпус 1, стр. 1, помещение 2,
+                                            офис 34</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart__amount">
+                                <div class="cart__amount-counter">
+                                    <button class="cart__amount-button-minus">
+                                        <span class="cart__amount-minus">−</span>
+                                    </button>
+                                    <span class="cart__amount-num"></span>
+                                    <button class="cart__amount-button-plus">
+                                        <span class="cart__amount-plus">+</span>
+                                    </button>
+                                </div>
+                                <p class="cart__amount-availability"></p>
+                                <p class="cart__amount-availability"></p>
+                                <div class="cart__amount-icons">
+                                    <button onclick="likeItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--heart cart__amount-img">
+                                            <use xlink:href="./images/heart.svg#heart"></use>
+                                        </svg>
+                                    </button>
+                                    <button onclick="deleteItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--trash cart__amount-img">
+                                            <use xlink:href="./images/trash.svg#trash"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cart__price">
+                                <p class="cart__price-current"></p>
+                                <p onmouseenter="showPrice(this)" onmouseleave="hidePrice(this)"
+                                    class="cart__price-past"></p>
+                                <div class="cart__price-info">
+                                    <div class="cart__price-sale-wrp">
+                                        <p class="cart__price-sale-percent">Скидка 55%</p>
+                                        <p class="cart__price-sale-som">-300 сом</p>
+                                    </div>
+                                    <div class="cart__price-sale-wrp">
+                                        <p class="cart__price-sale-percent">Скидка покупателя 10%</p>
+                                        <p class="cart__price-sale-som">-30 сом</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li data-id="2" data-price="297" class="main__item cart">
+                            <label>
+                                <input onclick="changeVisibility(this)" class="checkbox checkbox-single" type="checkbox"
+                                    name="checkbox_3">
+                                <span class="custom__input custom__input-single"></span>
+                            </label>
+                            <img class="cart__img" src="./images/item-3.jpg" width="72" height="96" alt="item-3">
+                            <div class="cart__description">
+                                <h2 class="cart__name">Карандаши цветные Faber-Castell "Замок", набор 24 цвета,
+                                    заточенные,
+                                    шестигранные, Faber-Castell </h2>
+                                <div class="cart__wrp">
+                                    <p class="cart__wrp-text"></p>
+                                </div>
+                                <p class="cart__adress">Коледино WB</p>
+                                <div class="cart__manufacturer">
+                                    <span class="cart__manufacturer-text">OOO
+                                        Вайлдберриз</span>
+                                    <img onmouseenter="showManufacturer(this)" onmouseleave="hideManufacturer(this)"
+                                        class="icon--info" src="./images/info.svg" alt="info">
+                                    <div class="cart__manufacturer-info">
+                                        <p class="cart__manufacturer-title">OOO
+                                            Вайлдберриз</p>
+                                        <p class="cart__manufacturer-info-text">ОГРН: 5167746237148</p>
+                                        <p class="cart__manufacturer-info-text">129337, Москва, улица Красная Сосна, 2,
+                                            корпус 1, стр. 1, помещение 2,
+                                            офис 34</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart__amount">
+                                <div class="cart__amount-counter">
+                                    <button class="cart__amount-button-minus">
+                                        <span class="cart__amount-minus">−</span>
+                                    </button>
+                                    <span class="cart__amount-num"></span>
+                                    <button class="cart__amount-button-plus">
+                                        <span class="cart__amount-plus">+</span>
+                                    </button>
+                                </div>
+                                <p class="cart__amount-availability"></p>
+                                <div class="cart__amount-icons">
+                                    <button onclick="likeItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--heart cart__amount-img">
+                                            <use xlink:href="./images/heart.svg#heart"></use>
+                                        </svg>
+                                    </button>
+                                    <button onclick="deleteItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--trash cart__amount-img">
+                                            <use xlink:href="./images/trash.svg#trash"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cart__price">
+                                <p class="cart__price-current"></p>
+                                <p class="cart__price-past"></p>
+                                <div class="cart__price-info">
+                                    <div class="cart__price-sale-wrp">
+                                        <p class="cart__price-sale-percent">Скидка 55%</p>
+                                        <p onmouseenter="showPrice(this)" onmouseleave="hidePrice(this)"
+                                            class="cart__price-sale-som">-300 сом</p>
+                                    </div>
+                                    <div class="cart__price-sale-wrp">
+                                        <p class="cart__price-sale-percent">Скидка покупателя 10%</p>
+                                        <p class="cart__price-sale-som">-30 сом</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="main__missing">
+                        <p class="main__missing-text">Отсутствуют · 3 товара</p>
+                        <button onclick="rotateArrow(this)" class="main__missing-button">
+                            <svg class="icon icon--arrow">
+                                <use xlink:href="./images/arrow.svg#arrow"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <ul class="main__list">
+                        <li class="main__item missing-cart">
+                            <span class="cart__mobile-size"></span>
+                            <img class="missing-cart__img" src="./images/item-1.jpg" width="72" height="96"
+                                alt="item-1">
+                            <div class="missing-cart__description">
+                                <h2 class="missing-cart__name">Футболка UZcotton мужская</h2>
+                                <div class="missing-cart__wrp">
+                                    <p class="missing-cart__wrp-text">Цвет: белый</p>
+                                    <p class="missing-cart__wrp-text">Размер: 56</p>
+                                </div>
+                                <p class="missing-cart__adress">Коледино WB</p>
+                                <div class="missing-cart__manufacturer">
+                                    <span class="missing-cart__manufacturer-text">OOO
+                                        Вайлдберриз</span>
+                                    <img class="icon--info" src="./images/info.svg" alt="info">
+                                    <div class="cart__manufacturer-info">
+                                        <p class="cart__manufacturer-title">OOO
+                                            Вайлдберриз</p>
+                                        <p class="cart__manufacturer-info-text">ОГРН: 5167746237148</p>
+                                        <p class="cart__manufacturer-info-text">129337, Москва, улица Красная Сосна, 2,
+                                            корпус 1, стр. 1, помещение 2,
+                                            офис 34</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="missing-cart__amount">
+                                <div class="missing-cart__amount-icons">
+                                    <button onclick="likeItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--heart">
+                                            <use xlink:href="./images/heart.svg#heart"></use>
+                                        </svg>
+                                    </button>
+                                    <button onclick="deleteMissingItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--trash">
+                                            <use xlink:href="./images/trash.svg#trash"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="main__item missing-cart">
+                            <img class="missing-cart__img" src="./images/item-2.jpg" width="72" height="96"
+                                alt="item-2">
+                            <div class="missing-cart__description">
+                                <h2 class="missing-cart__name">Силиконовый чехол картхолдер (отверстия) для карт,
+                                    прозрачный
+                                    кейс бампер
+                                    на Apple iPhone XR, MobiSafe</h2>
+                                <div class="missing-cart__wrp">
+                                    <p class="missing-cart__wrp-text">Цвет: прозрачный</p>
+                                    <p class="missing-cart__wrp-text"></p>
+                                </div>
+                                <p class="missing-cart__adress">Коледино WB</p>
+                                <div class="missing-cart__manufacturer">
+                                    <span class="missing-cart__manufacturer-text">OOO
+                                        Мегапрофстиль</span>
+                                    <img class="icon--info" src="./images/info.svg" alt="info">
+                                    <div class="cart__manufacturer-info">
+                                        <p class="cart__manufacturer-title">OOO
+                                            Вайлдберриз</p>
+                                        <p class="cart__manufacturer-info-text">ОГРН: 5167746237148</p>
+                                        <p class="cart__manufacturer-info-text">129337, Москва, улица Красная Сосна, 2,
+                                            корпус 1, стр. 1, помещение 2,
+                                            офис 34</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="missing-cart__amount">
+                                <div class="missing-cart__amount-icons">
+                                    <button onclick="likeItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--heart">
+                                            <use xlink:href="./images/heart.svg#heart"></use>
+                                        </svg>
+                                    </button>
+                                    <button onclick="deleteMissingItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--trash">
+                                            <use xlink:href="./images/trash.svg#trash"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="main__item missing-cart">
+                            <img class="missing-cart__img" src="./images/item-3.jpg" width="72" height="96"
+                                alt="item-3">
+                            <div class="missing-cart__description">
+                                <h2 class="missing-cart__name">Карандаши цветные Faber-Castell "Замок", набор 24 цвета,
+                                    заточенные,
+                                    шестигранные, Faber-Castell </h2>
+                                <div class="missing-cart__wrp">
+                                    <p class="missing-cart__wrp-text"></p>
+                                    <p class="missing-cart__wrp-text"></p>
+                                </div>
+                                <p class="missing-cart__adress">Коледино WB</p>
+                                <div class="missing-cart__manufacturer">
+                                    <span class="missing-cart__manufacturer-text">OOO
+                                        Вайлдберриз</span>
+                                    <img class="icon--info" src="./images/info.svg" alt="info">
+                                    <div class="cart__manufacturer-info">
+                                        <p class="cart__manufacturer-title">OOO
+                                            Вайлдберриз</p>
+                                        <p class="cart__manufacturer-info-text">ОГРН: 5167746237148</p>
+                                        <p class="cart__manufacturer-info-text">129337, Москва, улица Красная Сосна, 2,
+                                            корпус 1, стр. 1, помещение 2,
+                                            офис 34</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="missing-cart__amount">
+                                <div class="missing-cart__amount-icons">
+                                    <button onclick="likeItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--heart">
+                                            <use xlink:href="./images/heart.svg#heart"></use>
+                                        </svg>
+                                    </button>
+                                    <button onclick="deleteMissingItem(this)" class="cart__amount-button">
+                                        <svg class="icon icon--trash">
+                                            <use xlink:href="./images/trash.svg#trash"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="delivery">
+                        <button onclick="openDeliveryChoice()" class="change-button">
+                            <p class="change-text">Изменить</p>
+                        </button>
+                        <h1 class="delivery__title">Способ доставки</h1>
+                        <div class="delivery__point">
+                            <p class="delivery__point-question">Пункт выдачи</p>
+                            <div class="delivery__point-answer">
+                                <p class="delivery__point-adress">Бишкек, улица Ахматбека Суюмбаева, 12/1</p>
+                                <div class="delivery__point-info">
+                                    <svg class="icon icon--star">
+                                        <use xlink:href="./images/star.svg#star"></use>
+                                    </svg>
+                                    <span class="delivery__point-rating">4.99</span>
+                                    <span class="delivery__point-time">Ежедневно с 10 до 21</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="delivery__cost">
+                            <p class="delivery__cost-question">Стоимость доставки</p>
+                            <p class="delivery__cost-answer">Бесплатно</p>
+                        </div>
+                        <div class="delivery__date">
+                            <p class="delivery__date-question">5-6 февраля</p>
+                            <div class="delivery__date-answer"></div>
+                        </div>
+                        <div class="delivery__refusal">
+                            <img class="delivery__refusal-img" src="./images/accept.svg" alt="accept">
+                            <p class="delivery__refusal-text">Обратная доставка товаров на склад при отказе — <span
+                                    onmouseenter="showInfo(this)" onmouseleave="hideInfo(this)"
+                                    class="refusal-text-green">бесплатно</span></p>
+                            <div class="summary__refusal-info delivery__refusal-info">
+                                <p class="summary__refusal-info-text">Если товары вам не подойдут, мы вернем их обратно
+                                    на
+                                    склад — это бесплатно</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment">
+                        <button onclick="openPaymentChoice()" class="change-button">
+                            <p class="change-text">Изменить</p>
+                        </button>
+                        <h1 class="payment__title">Способ оплаты</h1>
+                        <div class="payment__card">
+                            <img class="set-card-img" src="./images/mir.jpg" width="32" height="24" alt="mir">
+                            <p class="payment__card-num set-card-num">1234 56•• ••••
+                                1234</p>
+                            <p class="payment__card-num set-card-span">01/10</p>
+                        </div>
+                        <p class="payment__info">Спишем оплату с карты при получении</p>
+                    </div>
+                    <div class="receiver">
+                        <h1 class="receiver__title">Получатель</h1>
+                        <div class="receiver__name">
+                            <div class="receiver__wrp">
+                                <input onblur="nameValidate(this)" required class="receiver__input receiver__first-name"
+                                    type="text" name="first-name" placeholder="Имя">
+                                <span class="receiver__span-error">Укажите имя</span>
+                                <span class="receiver__span">Имя</span>
+                            </div>
+                            <div class="receiver__wrp">
+                                <input onblur="nameValidate(this)" required class=" receiver__input
+                                    receiver__second-name" type="text" name="second-name" placeholder="Фамилия">
+                                <span class="receiver__span-error">Введите фамилию</span>
+                                <span class="receiver__span">Фамилия</span>
+                            </div>
+                        </div>
+                        <div class="receiver__data">
+                            <div class="receiver__wrp">
+                                <input onblur="emailValidate(this)" required
+                                    class="receiver__input receiver__data-email" type="text" name="email"
+                                    placeholder="Почта">
+                                <span class="receiver__span-error">Проверьте адрес электронной почты</span>
+                                <span class="receiver__span">Почта</span>
+                            </div>
+                            <div class="receiver__wrp">
+                                <input onblur="phoneValidate(this)" required
+                                    class="receiver__input receiver__data-number" type="text" name="number"
+                                    placeholder="Телефон">
+                                <span class="receiver__span-error">Формат: +9 999 999 99 99</span>
+                                <span class="receiver__span">Телефон</span>
+                            </div>
+                            <div class="receiver__wrp">
+                                <input onblur="innValidate(this)" required class="receiver__input receiver__data-inn"
+                                    type="text" name="inn" placeholder="ИНН">
+                                <span class="receiver__span-error">Формат: 1234567</span>
+                                <span class="receiver__span receiver__inn-span">ИНН</span>
+                                <p class="receiver__data-subtext">Для таможенного оформления</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="summary">
+                    <div class="summary__wrp">
+                        <p class="summary__title">Итого</p>
+                        <p class="summary__result"></p>
+                    </div>
+                    <div class="summary__info-wrp">
+                        <p class="summary__goods-title">4 товара</p>
+                        <p class="summary__goods-result"></p>
+                    </div>
+                    <div class="summary__info-wrp">
+                        <p class="summary__sale-title">Скидка</p>
+                        <p class="summary__sale-result"></p>
+                    </div>
+                    <div class="summary__info-wrp">
+                        <p class="summary__cost-title">Доставка</p>
+                        <p class="summary__cost-result">Бесплатно</p>
+                    </div>
+                    <div class="summary__delivery">
+                        <button onclick="openDeliveryChoice()" class="summary-button">
+                            <svg class="icon icon--pencil">
+                                <use xlink:href="./images/pencil.svg#pencil"></use>
+                            </svg>
+                        </button>
+                        <h2 class="summary__delivery-title">Доставка в пункт выдачи</h2>
+                        <p class="summary__delivery-text">Бишкек, улица Ахматбека Суюмбаева, 12/1</p>
+                        <p class="summary__delivery-date">5–8 фев</p>
+                    </div>
+                    <div class="summary__refusal">
+                        <img class="summary__refusal-img" src="./images/accept.svg" alt="accept">
+                        <p class="summary__refusal-text">Обратная доставка товаров на склад при отказе — <span
+                                onmouseenter="showInfo(this)" onmouseleave="hideInfo(this)"
+                                class="refusal-text-green">бесплатно</span></p>
+                        <div class="summary__refusal-info">
+                            <p class="summary__refusal-info-text">Если товары вам не подойдут, мы вернем их обратно на
+                                склад — это бесплатно</p>
+                        </div>
+                    </div>
+                    <div class="summary__payment">
+                        <button onclick="openPaymentChoice()" class="summary-button">
+                            <svg class="icon icon--pencil">
+                                <use xlink:href="./images/pencil.svg#pencil"></use>
+                            </svg>
+                        </button>
+                        <h2 class="summary__payment-title">Оплата картой</h2>
+                        <div class="payment__card">
+                            <img class="set-card-img" src="./images/mir.jpg" width="32" height="24" alt="mir">
+                            <p class="payment__card-num set-card-num">1234 56•• •••• 1234</p>
+                        </div>
+                    </div>
+                    <div class="summary__debit">
+                        <div class="summary__debit-wrp">
+                            <label>
+                                <input onclick="changeButton()" class="checkbox" type="checkbox" name="checkbox_4">
+                                <span class="custom__input summary__debit-input"></span>
+                            </label>
+                            <p class="summary__debit-text">Списать оплату сразу</p>
+                        </div>
+                        <p class="summary__debit-subtext">Спишем оплату с карты при получении</p>
+                    </div>
+                    <button onclick="validate()" class="summary__button" type="submit">Заказать</button>
+                    <div class="summary__agreement">
+                        <label>
+                            <input onclick="buttonDisabled()" class="checkbox summary__checkbox" type="checkbox"
+                                name="checkbox_4">
+                            <span class="summary__custom-input summary__agreement-input"></span>
+                        </label>
+                        <p class="summary__agreement-text">Соглашаюсь с правилами пользования торговой площадкой
+                            и возврата</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <article class="choice__shadow delivery-choice__shadow">
+        <div class="choice delivery-choice">
+            <button onclick="closeChoice(this)" class="choice__close">
+                <svg class="icon icon--close">
+                    <use xlink:href="./images/close.svg#close"></use>
+                </svg>
+            </button>
+            <h1 class="choice__title">Способ доставки</h1>
+            <div class="delivery-choice__buttons">
+                <button onclick="setActive(this)" class="delivery-choice__button delivery-choice__unactive">В пункт
+                    выдачи</button>
+                <button onclick="setActive(this)"
+                    class="delivery-choice__button delivery-choice__active">Курьером</button>
+            </div>
+            <p class="delivery-choice__adresses-title">Мои адреса</p>
+            <ul class="choice__adresses delivery-choice__adresses delivery-choice__adresses-point">
+                <li class="choice__adress">
+                    <label>
+                        <input checked class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <p class="delivery-choice__adress-text">г. Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</p>
+                    <button onclick="deleteItem(this)" class="delivery-choice__adress-button">
+                        <svg class="icon icon--trash">
+                            <use xlink:href="./images/trash.svg#trash"></use>
+                        </svg>
+                    </button>
+                    <div class="delivery-choice__point-info">
+                        <svg class="icon icon--star">
+                            <use xlink:href="./images/star.svg#star"></use>
+                        </svg>
+                        <span class="delivery-choice__point-rating"></span>
+                        <span class="delivery-choice__point-time">Пункт выдачи</span>
+                    </div>
+                </li>
+                <li class="choice__adress">
+                    <label>
+                        <input class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <p class="delivery-choice__adress-text">г. Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</p>
+                    <button onclick="deleteItem(this)" class="delivery-choice__adress-button">
+                        <svg class="icon icon--trash">
+                            <use xlink:href="./images/trash.svg#trash"></use>
+                        </svg>
+                    </button>
+                    <div class="delivery-choice__point-info">
+                        <svg class="icon icon--star">
+                            <use xlink:href="./images/star.svg#star"></use>
+                        </svg>
+                        <span class="delivery-choice__point-rating">4.99</span>
+                        <span class="delivery-choice__point-time">Ежедневно с 10 до 21</span>
+                    </div>
+                </li>
+                <li class="choice__adress">
+                    <label>
+                        <input class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <p class="delivery-choice__adress-text">г. Бишкек, улица Табышалиева, д. 57</p>
+                    <button onclick="deleteItem(this)" class="delivery-choice__adress-button">
+                        <svg class="icon icon--trash">
+                            <use xlink:href="./images/trash.svg#trash"></use>
+                        </svg>
+                    </button>
+                    <div class="delivery-choice__point-info">
+                        <svg class="icon icon--star">
+                            <use xlink:href="./images/star.svg#star"></use>
+                        </svg>
+                        <span class="delivery-choice__point-rating">4.99</span>
+                        <span class="delivery-choice__point-time">Ежедневно с 10 до 21</span>
+                    </div>
+                </li>
+            </ul>
+            <ul
+                class="choice__adresses delivery-choice__adresses delivery-choice__adresses-courier delivery-choice__adresses-active">
+                <li class="choice__adress">
+                    <label>
+                        <input class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <p class="delivery-choice__adress-text">г. Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</p>
+                    <button onclick="deleteItem(this)" class="delivery-choice__adress-button">
+                        <svg class="icon icon--trash">
+                            <use xlink:href="./images/trash.svg#trash"></use>
+                        </svg>
+                    </button>
+                </li>
+                <li class="choice__adress">
+                    <label>
+                        <input class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <p class="delivery-choice__adress-text">г. Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</p>
+                    <button onclick="deleteItem(this)" class="delivery-choice__adress-button">
+                        <svg class="icon icon--trash">
+                            <use xlink:href="./images/trash.svg#trash"></use>
+                        </svg>
+                    </button>
+                </li>
+                <li class="choice__adress">
+                    <label>
+                        <input class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <p class="delivery-choice__adress-text">г. Бишкек, улица Табышалиева, д. 57</p>
+                    <button onclick="deleteItem(this)" class="delivery-choice__adress-button">
+                        <svg class="icon icon--trash">
+                            <use xlink:href="./images/trash.svg#trash"></use>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+            <button onclick="chooseAdress(this)" class="choice__submit">Выбрать</button>
+        </div>
+    </article>
+    <article class="choice__shadow payment-choice__shadow">
+        <div class="choice payment__choice">
+            <button onclick="closeChoice(this)" class="choice__close">
+                <svg class="icon icon--close">
+                    <use xlink:href="./images/close.svg#close"></use>
+                </svg>
+            </button>
+            <h1 class="choice__title">Способ оплаты</h1>
+            <ul class="choice__adresses payment-choice__adresses">
+                <li class="choice__adress">
+                    <label>
+                        <input checked class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <div class="payment__card choice-payment__card">
+                        <img src="./images/mir.jpg" width="32" height="24" alt="mir">
+                        <p class="payment__card-num">1234 56•• •••• 1234</p>
+                        <span class="payment__span">01/10</span>
+                    </div>
+                </li>
+                <li class="choice__adress">
+                    <label>
+                        <input class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <div class="payment__card choice-payment__card">
+                        <img src="./images/visa.jpg" width="32" height="24" alt="mir">
+                        <p class="payment__card-num">1234 56•• •••• 2345</p>
+                        <span class="payment__span">02/10</span>
+                    </div>
+                </li>
+                <li class="choice__adress">
+                    <label>
+                        <input class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <div class="payment__card choice-payment__card">
+                        <img src="./images/mastercard.jpg" width="32" height="24" alt="mir">
+                        <p class="payment__card-num">1234 56•• •••• 3456</p>
+                        <span class="payment__span">03/10</span>
+                    </div>
+                </li>
+                <li class="choice__adress">
+                    <label>
+                        <input class="radio radio-single" type="radio" name="radio-1">
+                        <span class="custom__radio custom__radio-single"></span>
+                    </label>
+                    <div class="payment__card choice-payment__card">
+                        <img src="./images/maestro.jpg" width="32" height="24" alt="mir">
+                        <p class="payment__card-num">1234 56•• •••• 4567</p>
+                        <span class="payment__span">04/10</span>
+                    </div>
+                </li>
+            </ul>
+            <button onclick="chooseCard(this)" class="choice__submit">Выбрать</button>
+        </div>
+    </article>
+    <footer class="footer">
+        <p class="footer__text">© 2022 ООО «Товары и точка»</p>
+    </footer>
+
+    <script src="./app.js"></script>
+    <script src="./counter.js"></script>
+</body>
+
+</html>

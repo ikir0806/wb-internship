@@ -1,0 +1,97 @@
+.icon--search {
+    opacity: 0.4;
+    width: 21px;
+    height: 21px;
+    fill: white;
+}
+
+.icon--menu {
+    fill: white;
+    width: 28px;
+    height: 24px;
+}
+
+.icon--menu-mobile {
+    fill: white;
+    width: 24px;
+    height: 20px;
+    display: none;
+}
+
+.icon--profile {
+    width: 19px;
+    height: 20px;
+    fill: white;
+}
+
+.icon--cart {
+    width: 27px;
+    height: 23px;
+    fill: white;
+}
+
+.icon--arrow {
+    fill: #A0A0A4;
+    width: 16px;
+    height: 10px;
+}
+
+.icon--arrow-rotated {
+    transform: rotate(180deg);
+}
+
+.icon--info {
+    width: 24px;
+    height: 20px;
+    fill: transparent;
+}
+
+.icon--heart {
+    width: 20px;
+    height: 16px;
+    fill: black;
+}
+
+.icon--heart-selected {
+    fill: #CB11AB;
+}
+
+.icon--trash {
+    width: 16px;
+    height: 16px;
+    fill: black;
+}
+
+.icon--trash:hover {
+    fill: #F55123;
+}
+
+.icon--star {
+    fill: #FF970D;
+    width: 12px;
+    height: 12px;
+}
+
+.icon--pencil {
+    position: absolute;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    fill: #CB11AB;
+}
+
+.icon--close {
+    width: 16px;
+    height: 16px;
+    fill: #9797AF;
+}
+
+@media screen and (min-width: 429px) and (max-width: 767px) {
+    .icon--menu {
+        display: none;
+    }
+
+    .icon--menu-mobile {
+        display: block;
+    }
+}
