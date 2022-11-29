@@ -40,13 +40,25 @@ let deliveryRow = null
 let itemsPerRow = null
 
 const itemListEl = document.querySelector('.main__list')
+let missingAmount = 3
+let mainAmount = 0
+let mainPrice = 0
 let summaryPrice = 0
 let summaryPastPrice = 0
-let cartAmount = document.querySelector('.header__cart')
+let cartAmount = items.length
+let cartAmountText = document.querySelector('.header__cart')
     .querySelector('span')
-cartAmount.textContent = `${items.length}`
+cartAmountText.textContent = `${cartAmount}`
+let summaryAmountText = document.querySelector('.summary__goods-title')
+summaryAmountText.textContent =
+    `${cartAmount} ${amountEnding(cartAmount)}`
+let missingAmountText = document
+    .querySelector('.main__missing-amount')
+missingAmountText.textContent =
+    `${missingAmount} ${amountEnding(missingAmount)}`
 
 items.forEach((item) => {
+    mainAmount += item.amount
     summaryPrice += item.totalPrice
     summaryPastPrice += item.pastTotalPrice
 
@@ -55,7 +67,8 @@ items.forEach((item) => {
     element.querySelector('.cart__amount-num')
         .textContent = item.amount
     element.querySelector('.cart__price-current')
-        .textContent = `${(item.totalPrice).toLocaleString('ru-RU')} сом`
+        .textContent = `${(item.totalPrice)
+            .toLocaleString('ru-RU')} сом`
     element.querySelector('.cart__price-past')
         .textContent = `${(item.pastTotalPrice)
             .toLocaleString('ru-RU')} сом`
@@ -85,6 +98,13 @@ items.forEach((item) => {
         .insertAdjacentHTML('beforeend', deliveryRow);
 })
 
+mainPrice = summaryPrice
+let mainPriceText = document.querySelector('.main__closed-price')
+mainPriceText.textContent = `${(mainPrice)
+    .toLocaleString('ru-RU')} сом`
+let mainAmountText = document.querySelector('.main__closed-amount')
+mainAmountText.textContent = `${(mainAmount)
+    .toLocaleString('ru-RU')} ${amountEnding(mainAmount)}`
 let summaryPriceText = document
     .querySelector('.summary__result')
 summaryPriceText.textContent = `${(summaryPrice)
@@ -162,8 +182,8 @@ function itemPlus(id, price, newPriceEl, newAmountEl) {
             .querySelector('.cart[data-id="' + id + '"]')
             .querySelector('.cart__amount-button-minus')
             .disabled = false
-        cartAmount.textContent = `${(+cartAmount.textContent + 1)
-            .toLocaleString('ru-RU')}`
+        cartAmount++
+        cartAmountUpdate()
     }
 
     if (items[id].amount == items[id].totalAmount) document
@@ -203,7 +223,8 @@ function itemMinus(id, price, newPriceEl, newAmountEl) {
             .querySelector('.cart[data-id="' + id + '"]')
             .querySelector('.cart__amount-button-minus')
             .disabled = true
-        cartAmount.textContent = `${(cartAmount.textContent - 1).toLocaleString('ru-RU')}`
+        cartAmount--
+        cartAmountUpdate()
     }
 
     if (document
@@ -243,14 +264,16 @@ function changeVisibility(element) {
     if (element.checked) {
         reduceSummaryPrice(items[id].totalPrice)
         reduceSummaryPastPrice(items[id].pastTotalPrice)
-        cartAmount.textContent = `${cartAmount.textContent - 1}`
+        cartAmount--
+        cartAmountUpdate()
         reduceAmount(id, items[id].amount)
         buttonsDisabled(element)
     }
     else {
         increaseSummaryPrice(items[id].totalPrice)
         increaseSummaryPastPrice(items[id].pastTotalPrice)
-        cartAmount.textContent = `${+cartAmount.textContent + 1}`
+        cartAmount++
+        cartAmountUpdate()
         increaseAmount(id, items[id].amount)
         buttonsEnabled(element)
     }
@@ -263,12 +286,18 @@ function deleteItem(element) {
     reduceSummaryPastPrice(items[id]?.pastTotalPrice)
     updateCost()
     element.closest('li').style.display = 'none'
-    cartAmount.textContent = `${cartAmount.textContent - 1}`
+    cartAmount--
+    cartAmountUpdate()
     reduceAmount(id, items[id]?.amount)
+    mainReduced(id)
 }
 
 function deleteMissingItem(element) {
     element.closest('li').style.display = 'none'
+    missingAmount--
+    missingAmountText.textContent =
+        `${missingAmount} ${amountEnding(missingAmount)}`
+
 }
 
 function changeCheckboxes(element) {
@@ -282,7 +311,8 @@ function changeCheckboxes(element) {
         summaryPastPriceText.textContent = `${(summaryPastPrice)
             .toLocaleString('ru-RU')} сом`
         updateCost()
-        cartAmount.textContent = `0`
+        cartAmount = 0
+        cartAmountUpdate()
 
         elements.forEach(el => {
             reduceAmount(el.dataset.id, items[el.dataset.id].amount)
@@ -297,8 +327,8 @@ function changeCheckboxes(element) {
                 increaseSummaryPrice(items[id].totalPrice)
                 increaseSummaryPastPrice(items[id].pastTotalPrice)
                 updateCost()
-                cartAmount.textContent =
-                    `${+cartAmount.textContent + 1}`
+                cartAmount++
+                cartAmountUpdate()
                 increaseAmount(id, items[id].amount)
                 buttonsEnabled(el)
             }
@@ -480,4 +510,29 @@ function buttonsDisabled(el) {
     el.closest('.cart')
         .querySelector('.cart__amount-button-plus')
         .disabled = true
+}
+
+function mainReduced(id) {
+    mainAmount = mainAmount - items[id].amount
+    mainPrice = mainPrice - items[id].totalPrice
+
+    mainAmountText.textContent = `${(mainAmount).toLocaleString('ru-RU')} ${amountEnding(mainAmount)}`
+    mainPriceText.textContent = `${(mainPrice).toLocaleString('ru-RU')} сом`
+}
+
+function amountEnding(num) {
+    let mod = num % 10
+
+    if (mod == 1) return 'товар'
+
+    else if (mod == 2 || mod == 3 || mod == 4)
+        return 'товара'
+
+    else return 'товаров'
+}
+
+function cartAmountUpdate() {
+    cartAmountText.textContent = `${(cartAmount)
+        .toLocaleString('ru-RU')}`
+    summaryAmountText.textContent = `${cartAmount} ${amountEnding(cartAmount)}`
 }
