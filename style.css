@@ -269,6 +269,16 @@ button:link {
     padding-bottom: 17px;
 }
 
+.main__closed-text {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.disabled {
+    display: none;
+}
+
 .main__goods-text {
     font-size: 16px;
     line-height: 24px;

@@ -34,6 +34,9 @@ function rotateArrow(element) {
         visibility.display = 'none'
     else visibility.display = 'flex'
     rotationEl.classList.toggle('icon--arrow-rotated')
+
+    document.querySelector('.main__opened').classList.toggle('disabled')
+    document.querySelector('.main__closed').classList.toggle('disabled')
 }
 
 function likeItem(element) {

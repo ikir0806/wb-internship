@@ -57,11 +57,21 @@
                 <div class="main__base">
                     <h1 class="main__title">корзина</h1>
                     <div class="main__goods">
-                        <label>
-                            <input onchange="changeCheckboxes(this)" class="checkbox" type="checkbox" name="checkbox_0">
-                            <span class="custom__input custom__input-multi"></span>
-                        </label>
-                        <p class="main__goods-text">Выбрать все</p>
+                        <div class="main__opened">
+                            <label>
+                                <input onchange="changeCheckboxes(this)" class="checkbox" type="checkbox"
+                                    name="checkbox_0">
+                                <span class="custom__input custom__input-multi"></span>
+                            </label>
+                            <p class="main__goods-text">Выбрать все</p>
+                        </div>
+                        <div class="main__closed disabled">
+                            <h2 class="main__closed-text">
+                                <span class="main__closed-text main__closed-amount"></span>
+                                ·
+                                <span class="main__closed-text main__closed-price"></span>
+                            </h2>
+                        </div>
                         <button onclick="rotateArrow(this)" class="main__goods-button">
                             <svg class="icon icon--arrow">
                                 <use xlink:href="./images/arrow.svg#arrow"></use>
@@ -283,7 +293,8 @@
                         </li>
                     </ul>
                     <div class="main__missing">
-                        <p class="main__missing-text">Отсутствуют · 3 товара</p>
+                        <p class="main__missing-text">Отсутствуют · <span
+                                class="main__missing-text main__missing-amount"></span></p>
                         <button onclick="rotateArrow(this)" class="main__missing-button">
                             <svg class="icon icon--arrow">
                                 <use xlink:href="./images/arrow.svg#arrow"></use>
@@ -513,7 +524,7 @@
                         <p class="summary__result"></p>
                     </div>
                     <div class="summary__info-wrp">
-                        <p class="summary__goods-title">4 товара</p>
+                        <p class="summary__goods-title"></p>
                         <p class="summary__goods-result"></p>
                     </div>
                     <div class="summary__info-wrp">
