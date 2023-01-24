@@ -282,14 +282,16 @@ function changeVisibility(element) {
 
 function deleteItem(element) {
     let id = element.closest('li').dataset.id
-    reduceSummaryPrice(items[id]?.totalPrice)
-    reduceSummaryPastPrice(items[id]?.pastTotalPrice)
-    updateCost()
+    if (!element.closest('li').querySelector('.checkbox').checked) {
+        reduceSummaryPrice(items[id]?.totalPrice)
+        reduceSummaryPastPrice(items[id]?.pastTotalPrice)
+        updateCost()
+        cartAmount--
+        cartAmountUpdate()
+        reduceAmount(id, items[id]?.amount)
+        mainReduced(id)
+    }
     element.closest('li').style.display = 'none'
-    cartAmount--
-    cartAmountUpdate()
-    reduceAmount(id, items[id]?.amount)
-    mainReduced(id)
 }
 
 function deleteMissingItem(element) {
@@ -471,8 +473,10 @@ function updateCost() {
 }
 
 function increaseSummaryPrice(num) {
+    console.log(num)
+    console.log(summaryPrice)
     summaryPrice += num
-    summaryPriceText.textContent = `${(round(summaryPastPrice))
+    summaryPriceText.textContent = `${(round(summaryPrice))
         .toLocaleString('ru-RU')} сом`
 }
 
